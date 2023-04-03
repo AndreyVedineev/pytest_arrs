@@ -7,10 +7,17 @@ def test_get():
     assert arrs.get([], 0, "test") == "test"
 
 
+@pytest.mark.parametrize("arrs_list, start, end, result", [([1, 2, 3, 4], 1, 3, [2, 3]),
+                                                           ([], 1, 3, []),
+                                                           ([1, 2, 3], -1, 2, []),
+                                                           ([1, 2, 3], -4, 2, [1, 2]),
+                                                           ([1, 2, 3], 1, None, [2, 3])
+                                                           ])
+def test_slice(arrs_list, start, end, result):
+    assert arrs.my_slice(arrs_list, start, end) == result
 
-def test_slice():
-    assert arrs.my_slice([1, 2, 3, 4], 1, 3) == [2, 3]
-    assert arrs.my_slice([1, 2, 3], 1) == [2, 3]
-    assert arrs.my_slice([], 1, 3) == []
-    assert arrs.my_slice([1, 2, 3], -1, 2) == []
-    assert arrs.my_slice([1, 2, 3], -4, 2) == [1, 2]
+    # assert arrs.my_slice([1, 2, 3, 4], 1, 3) == [2, 3]
+    # assert arrs.my_slice([1, 2, 3], 1) == [2, 3]
+    # assert arrs.my_slice([], 1, 3) == []
+    # assert arrs.my_slice([1, 2, 3], -1, 2) == []
+    # assert arrs.my_slice([1, 2, 3], -4, 2) == [1, 2]
